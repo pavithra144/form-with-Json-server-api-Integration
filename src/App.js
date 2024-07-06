@@ -4,6 +4,7 @@ import FormInput from './form/FormInput';
 import Accordion from './accordion/Accordion';
 import AccordionItem from './accordion/AccordionItem';
 import Checkbox from './check-box/Checkbox';
+import { InputTypes } from './input-types/InputTypes';
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     <div className="App">
       {/* <FormInput /> */}
       {/* <AccordionItem /> */}
-      <Checkbox />
+      {/* <Checkbox /> */}
+      <InputTypes />
     </div>
   );
 }

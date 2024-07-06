@@ -1,0 +1,130 @@
+import React, { useReducer } from 'react';
+
+const initialState = {
+    firstname: '',
+    radiobox: [
+        { id: 1, label: 'Female', checked: false },
+        { id: 2, label: 'Male', checked: false }
+    ],
+    checkboxInput: [
+        { id: 1, label: 'CB1', checked: false },
+        { id: 2, label: 'CB2', checked: false },
+        { id: 3, label: 'CB3', checked: false },
+        { id: 4, label: 'CB4', checked: false }
+    ],
+    dropdownValue: '',
+    fileupload: null
+};
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'SET_TEXT':
+            return { ...state, firstname: action.payload };
+        case 'SET_RADIO':
+            return {
+                ...state,
+                radiobox: state.radiobox.map(item => ({
+                    ...item,
+                    checked: item.label === action.payload
+                }))
+            };
+        case 'SET_CHECKBOX':
+            return {
+                ...state,
+                checkboxInput: state.checkboxInput.map(item => {
+                    if (item.label === action.payload) {
+                        return { ...item, checked: !item.checked };
+                    }
+                    return item;
+                })
+            };
+        case 'SET_DROPDOWN':
+            return { ...state, dropdownValue: action.payload };
+        case 'SET_FILE':
+            return { ...state, fileupload: action.payload };
+        default:
+            return state;
+    }
+};
+
+export const InputTypes = () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const onChangeHandler = (e) => {
+        const { type, name, value, files } = e.target;
+
+        if (type === 'text') {
+            dispatch({ type: 'SET_TEXT', payload: value });
+        } else if (type === 'radio') {
+            dispatch({ type: 'SET_RADIO', payload: value });
+        } else if (type === 'checkbox') {
+            dispatch({ type: 'SET_CHECKBOX', payload: value });
+        } else if (name === 'dropdown-option') {
+            dispatch({ type: 'SET_DROPDOWN', payload: value });
+        } else if (type === 'file') {
+            dispatch({ type: 'SET_FILE', payload: files[0] });
+        }
+    };
+
+    return (
+        <div className='m-4'>
+            <div className='m-2'>
+                <h4>Text</h4>
+                <input type='text' value={state.firstname} onChange={onChangeHandler} />
+            </div>
+            <div className='m-2'>
+                <h4>Radio</h4>
+                {state.radiobox.map(item => (
+                    <div key={item.id}>
+                        <input 
+                            type='radio' 
+                            name='radiobox' 
+                            value={item.label} 
+                            checked={item.checked} 
+                            onChange={onChangeHandler} 
+                        />
+                        <label className='m-2'>{item.label}</label>
+                    </div>
+                ))}
+            </div>
+            <div className='m-2'>
+                <h4>Checkbox</h4>
+                {state.checkboxInput.map(item => (
+                    <div key={item.id}>
+                        <input 
+                            type='checkbox' 
+                            name='checkboxInput' 
+                            value={item.label} 
+                            checked={item.checked} 
+                            onChange={onChangeHandler} 
+                        />
+                        <label className='m-2'>{item.label}</label>
+                    </div>
+                ))}
+            </div>
+            <div className='m-2'>
+                <h4>Dropdown</h4>
+                <select name='dropdown-option' value={state.dropdownValue} onChange={onChangeHandler}>
+                    <option value=''>Select an option</option>
+                    {initialState.dropdownValue.map(item => (
+                        <option key={item.id} value={item.label}>{item.label}</option>
+                    ))}
+                </select>
+            </div>
+            <div className='m-2'>
+                <h4>File Upload</h4>
+                <input type='file' name='fileupload' onChange={onChangeHandler} />
+            </div>
+            <div>
+                <h4>Debug Information</h4>
+                <p>Text: {JSON.stringify(state.firstname)}</p>
+                <p>Radio: {JSON.stringify(state.radiobox)}</p>
+                <p>Checkbox: {JSON.stringify(state.checkboxInput)}</p>
+                <p>Dropdown: {JSON.stringify(state.dropdownValue)}</p>
+                <p>File: {state.fileupload ? state.fileupload.name : 'No file selected'}</p>
+            </div>
+        </div>
+    );
+};
+
+export default InputTypes;
