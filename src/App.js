@@ -5,6 +5,7 @@ import Accordion from './accordion/Accordion';
 import AccordionItem from './accordion/AccordionItem';
 import Checkbox from './check-box/Checkbox';
 import { InputTypes } from './input-types/InputTypes';
+import InputTypesReducer from './input-types/InputTypesReducer';
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
       {/* <FormInput /> */}
       {/* <AccordionItem /> */}
       {/* <Checkbox /> */}
-      <InputTypes />
+      {/* <InputTypes /> */}
+      <InputTypesReducer />
     </div>
   );
 }
