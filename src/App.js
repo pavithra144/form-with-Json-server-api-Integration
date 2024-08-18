@@ -6,6 +6,7 @@ import AccordionItem from './accordion/AccordionItem';
 import Checkbox from './check-box/Checkbox';
 import { InputTypes } from './input-types/InputTypes';
 import InputTypesReducer from './input-types/InputTypesReducer';
+import Post from './testApiCalls/Posts';
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
       {/* <AccordionItem /> */}
       {/* <Checkbox /> */}
       {/* <InputTypes /> */}
-      <InputTypesReducer />
+      {/* <InputTypesReducer /> */}
+      <Post />
     </div>
   );
 }
