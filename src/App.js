@@ -7,6 +7,7 @@ import Checkbox from './check-box/Checkbox';
 import { InputTypes } from './input-types/InputTypes';
 import InputTypesReducer from './input-types/InputTypesReducer';
 import Post from './testApiCalls/Posts';
+import Input from './memo-handson/Input';
 
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
       {/* <Checkbox /> */}
       {/* <InputTypes /> */}
       {/* <InputTypesReducer /> */}
-      <Post />
+      {/* <Post /> */}
+      <Input />
     </div>
   );
 }
